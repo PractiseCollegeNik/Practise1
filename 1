@@ -1,0 +1,27 @@
+
+const puppeteer = require('puppeteer');
+
+(async () => {
+    try {
+        const browser = await puppeteer.launch({ headless: false });
+        const page = await browser.newPage();
+
+        await page.setViewport({ width: 0, height: 0, deviceScaleFactor: 0 });
+
+        // Переход по ссылке
+        await page.goto('https://funpay.com/');
+
+        await page.waitForSelector('a');
+
+        const links = await page.$$('a');
+
+        // Переход по ссылке
+        await page.goto('https://funpay.com/lots/3020/');
+
+        // Переход по ссылке
+        await page.goto('https://funpay.com/lots/3020/trade');
+
+    } catch (error) {
+        console.error('Произошла ошибка:', error);
+    }
+})();
